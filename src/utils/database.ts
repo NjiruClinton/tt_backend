@@ -10,10 +10,21 @@ const {
     DB_DATABASE,
     DB_USER,
     DB_PASSWORD,
-    DB_EXTERNAL_URL
+    DB_EXTERNAL_URL,
+    NODE_ENV
 } = process.env;
 
-const sequelize = new Sequelize(
+const sequelize = NODE_ENV === 'production'
+? new Sequelize(DB_EXTERNAL_URL as string, {
+        dialect: 'postgres',
+        protocol: 'postgres',
+        dialectOptions: {
+            ssl: {
+                require: true,
+                rejectUnauthorized: false,
+            },
+        }
+    }) : new Sequelize(
     DB_DATABASE as string,
     DB_USER as string,
     DB_PASSWORD as string,
@@ -22,18 +33,7 @@ const sequelize = new Sequelize(
         port: DB_PORT ? parseInt(DB_PORT, 10) : 3306,
         dialect: 'postgres',
         logging: false,
-    }
-);
-// const sequelize = new Sequelize(DB_EXTERNAL_URL as string, {
-//     dialect: 'postgres',
-//     protocol: 'postgres',
-//     dialectOptions: {
-//         ssl: {
-//             require: true,
-//             rejectUnauthorized: false,
-//         },
-//     }
-// });
+    })
 
 export async function connectDatabase() {
     try {
