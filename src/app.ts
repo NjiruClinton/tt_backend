@@ -17,7 +17,7 @@ export async function createApp() {
     const app = express()
     
     const corsOptions = {
-        origin: ["https://tts-front-git-main-njiruclintons-projects.vercel.app"], //, "http://localhost:3000"
+        origin: ["https://tts-front-git-main-njiruclintons-projects.vercel.app", "https://tts-front-omega.vercel.app/"], //, "http://localhost:3000"
         credentials: true,
         allowedHeaders: ['Content-Type', 'Authorization']
     }
