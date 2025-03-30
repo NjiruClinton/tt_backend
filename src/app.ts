@@ -1,7 +1,6 @@
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { makeExecutableSchema } from '@graphql-tools/schema';
-// import { authTypeDefs, taskTypeDefs } from '../schemas';
 import { createContext } from './utils/context';
 import {sequelize} from "./utils/database";
 import {authResolvers} from "./graphql/resolvers/auth";
@@ -29,5 +28,5 @@ export async function createApp() {
     await server.start();
     server.applyMiddleware({ app });
 
-    return app;
+    return { app, server }
 }

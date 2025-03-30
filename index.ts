@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 4000;
 
 async function startServer() {
     try {
-        const app = await createApp();
+        const {app} = await createApp();
 
         app.listen(PORT, () => {
             console.log(`Server running at http://localhost:${PORT}/graphql`);

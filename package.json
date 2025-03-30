@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "nodemon --exec ts-node index.ts",
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +15,7 @@
   "description": "",
   "dependencies": {
     "@types/jsonwebtoken": "^9.0.9",
+    "apollo-server": "^3.13.0",
     "apollo-server-express": "^3.13.0",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^3.0.2",
