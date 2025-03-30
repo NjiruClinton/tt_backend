@@ -42,5 +42,6 @@ export const authTypeDefs = gql`
     login(input: LoginInput!): AuthPayload
     updateUser(input: UpdateUserInput!): User!
     deleteUser: Boolean!
+    verifyToken(token: String!): Boolean!
   }
 `;

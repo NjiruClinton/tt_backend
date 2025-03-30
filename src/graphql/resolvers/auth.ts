@@ -79,6 +79,17 @@ export const authResolvers = {
 
             return await currentUser.update(input)
         },
+        
+        verifyToken: async (_: any, { token }: any, { user }: any) => {
+            if (!token) throw new Error('No token provided')
+            try {
+                let user = jwt.verify(token, JWT_SECRET)
+                return !!user
+            } catch (error) {
+                return false
+                // throw new Error('Invalid token')
+            }
+        },
 
         deleteUser: async (_: any, __: any, { user }: any) => {
             if (!user) throw new Error('Not authenticated')
@@ -87,7 +98,7 @@ export const authResolvers = {
             if (!currentUser) throw new Error('User not found')
 
             // Soft delete (sets deletedAt timestamp)
-            await currentUser.destroy();
+            await currentUser.destroy()
 
             return true;
         },
